@@ -28,7 +28,7 @@ class RegisterController extends Controller
         $user->email = $request['email'];
         $user->phone = $request['phone'];
         $user->name = 'Add Name';
-        $otp = Str::random(4);
+        $otp = rand(1000, 9999);
         $user->otp = $otp;
         Notification::route('mail',  $request["email"])->notify(new sendOtp($otp));
         $user->save();

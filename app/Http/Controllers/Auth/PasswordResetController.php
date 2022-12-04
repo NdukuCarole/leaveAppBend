@@ -34,7 +34,7 @@ class PasswordResetController extends Controller
     public function forgotPassword(Request $request)
     {
      $user = User::whereEmail($request->email)->first();
-     $otp = Str::random(4);
+     $otp = rand(1000, 9999);
      $user->otp = $otp;
      $user->update();
      Notification::route('mail',  $request["email"])->notify(new sendOtp($otp));

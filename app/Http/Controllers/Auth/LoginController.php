@@ -27,12 +27,24 @@ class LoginController extends Controller
                 "token" => $user->createToken("app")->plainTextToken
                 
             ]);
-        }else{
-            return response()->json([
-                "status"=>'error', 
-                "message" => "Wrong Credentials",
+        }else{ 
+            $user = User::whereEmail($request->email)->first();
+            if(!$user){
+                return response()->json([
+                    "status"=>'error', 
+                    "message" => "You dont exist",
+                    
+                ]);
                 
-            ]);
+            } else {
+                return response()->json([
+                    "status"=>'error', 
+                    "message" => "Wrong Credentials",
+                    
+                ]);
+
+            }
+           
             
         }
     }
