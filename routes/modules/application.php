@@ -16,5 +16,7 @@ use App\Http\Controllers\Application\ApplicationController;
 Route::group(['prefix' => 'app'], function (){
 
     Route::post('save', [ApplicationController::class,'store']);
+    Route::get('users', [ApplicationController::class,'getUsers']);
+    Route::get('all', [ApplicationController::class,'getAllApplications']);
 
 });

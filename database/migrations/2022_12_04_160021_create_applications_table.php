@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('startDate');
             $table->string('endDate');
             $table->string('name');
-            $table->string('attachment');
+            $table->longText('attachment');
             $table->string('comments');
+            $table->string('applicantId');
             $table->timestamps();
         });
     }
