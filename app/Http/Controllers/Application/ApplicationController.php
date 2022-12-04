@@ -12,7 +12,7 @@ class ApplicationController extends Controller
     //
   
 
-    public function insert(Request $request){
+    public function store(Request $request){
         if ($request->hasFile('attachment')) {
             $image = $request->file('attachment');
             $imageLink= Storage::disk('public')->put('avatars', $image);
@@ -23,10 +23,10 @@ class ApplicationController extends Controller
         $endDate = $request['endDate'];
         $name = $request['name'];
         $url = $imageLink;
-        $comments = $request['commentss'];
+        $comments = $request['comments'];
      
        
-        $data=array('days'=>$days,"handover"=>$handover,"startDate"=>$startDate,"endDate"=>$endDate,"attachment"=>$url,"comments"=>$comments);
+        $data=array('days'=>$days,"handover"=>$handover,"startDate"=>$startDate,"endDate"=>$endDate,"attachment"=>$url,"comments"=>$comments,"name"=>$name);
         DB::table('applications')->insert($data);
     }
 }

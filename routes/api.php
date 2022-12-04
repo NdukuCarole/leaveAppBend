@@ -21,4 +21,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'v1'], function (){
     Route::namespace('App\Http\Controllers\Auth')->group(base_path('routes/modules/auth.php'));
+    Route::namespace('App\Http\Controllers\Application')->group(base_path('routes/modules/application.php'));
 });
