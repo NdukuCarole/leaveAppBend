@@ -32,6 +32,7 @@ class RegisterController extends Controller
         $user->otp = $otp;
         Notification::route('mail',  $request["email"])->notify(new sendOtp($otp));
         $user->save();
+
         
         return response()->json([
             "message" => "check Otp in the mail",

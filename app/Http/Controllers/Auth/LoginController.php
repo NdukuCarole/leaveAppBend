@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -16,11 +17,14 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+        $user = User::whereEmail($request->email)->first();
         $credentials=$request->all();
         if (Auth::attempt($credentials)) {
             return response()->json([
                 "status"=>'success',
                 "message" => "Successfull",
+                "user"=>$user,
+                "token" => $user->createToken("app")->plainTextToken
                 
             ]);
         }else{
