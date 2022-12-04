@@ -32,12 +32,35 @@ class RegisterController extends Controller
         $user->otp = $otp;
         Notification::route('mail',  $request["email"])->notify(new sendOtp($otp));
         $user->save();
-       
+        
         return response()->json([
             "message" => "check Otp in the mail",
             
         ]);
-             
+        
     }
-    
+    public function verify(Request $request)
+    {
+        $user = User::whereEmail($request->email)->first();
+        if($request->otp===$user['otp']) {
+            return response()->json([
+                "message" => "Proceed to Login",
+                
+            ]);
+                 
+        }else{
+            return response()->json([
+                "message" => "Otp is wrong",
+                
+            ]);
+            
+        }      
+        
+    }
+    public function generateOtp(Request $request)
+    {
+        $otp = Str::random(4);
+        Notification::route('mail',  $request["email"])->notify(new sendOtp($otp));
+           
+    }
 }
